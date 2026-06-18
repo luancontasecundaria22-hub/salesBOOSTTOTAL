@@ -128,6 +128,37 @@ Defer: Enrichment, Strategy, Sender automation, and all other business agents.
 
 ---
 
+## Section 4 — Data (LOCKED)
+
+1. **Per-lead data stored:** name, contact handle, raw inbound message, source,
+   timestamp + AI-derived fields (intent, signals, confidence, drafted reply,
+   approval status). **Includes the client's customers' PII** → triggers
+   privacy/compliance (Sec 7).
+2. **Inbound channels (MVP): WhatsApp + Instagram** (both Meta platforms).
+3. **Outbound:** reply in the SAME channel the lead arrived on.
+4. **Retention:** purge raw lead data after **30 days**; hard-delete on client
+   offboarding. KEEP anonymized/aggregated metrics beyond 30 days for Analytics.
+5. **System of record: Supabase.** Make = plumbing/routing only, not storage.
+
+### ⚠️ CRITICAL CONSTRAINT — Meta 24-hour messaging window
+- WhatsApp Cloud API & Instagram Messaging only allow **free-form** messages
+  within **24h of the customer's last message**. After 24h: WhatsApp = approved
+  templates only; Instagram = limited message tags only. **No free-form AI reply.**
+- Therefore client approval MUST happen inside the 24h window, ideally minutes.
+  Reinforces **auto-send high-confidence + escalate-by-exception** (Sec 6).
+- **Per-client connection onboarding:** each client connects their OWN WhatsApp
+  Business number + Instagram Professional account (linked to a FB Page).
+  This is the bulk of onboarding engineering.
+- **Meta App Review + Business Verification** required for production multi-client
+  use — takes weeks, gates launch. Budget timeline now.
+- Pre-approved **WhatsApp message templates** needed for re-engagement outside 24h.
+
+### Retention nuance
+- 30-day purge of raw PII conflicts with Analytics needing history.
+  Resolution: purge raw PII at 30d, retain anonymized aggregates (counts,
+  scores, conversion outcomes) for trend analysis.
+
+---
+
 ## Sections still to cover
-4. Data · 6. Automation · 7. Security · 8. Infrastructure ·
-9. Scale · 10. Roadmap
+6. Automation · 7. Security · 8. Infrastructure · 9. Scale · 10. Roadmap
