@@ -190,5 +190,26 @@ Defer: Enrichment, Strategy, Sender automation, and all other business agents.
 
 ---
 
+## Section 7 — Security (LOCKED)
+
+1. **Client isolation (layered):**
+   - Discord: one server per client.
+   - Supabase: single project, `client_id` on every row, **RLS enforced** —
+     a query can never return another client's rows even with an app bug.
+   - AI context: every agent run scoped to ONE `client_id`; **no cross-client
+     data ever enters a single Claude prompt.** (Biggest real-world leak vector.)
+2. **Credentials encrypted at rest** (Supabase Vault / secrets manager). Never
+   plaintext in config or Make scenario fields. Per-client WhatsApp/IG tokens.
+3. **Compliance: LGPD + Meta Platform Terms** (Brazil default). If any client
+   serves EU customers → GDPR layers on top. (Confirm client/customer countries
+   when known.)
+4. **Consent & opt-out tracking built in from day one.** Honor WhatsApp opt-in
+   requirement + "STOP" opt-out across all flows. System tracks consent state.
+5. **Immutable audit trail** for every AI-sent message, approval, and auto-send
+   (who/what/when, human vs AI). In-scope for v1. Needed for client trust +
+   Meta/legal disputes.
+
+---
+
 ## Sections still to cover
-7. Security · 8. Infrastructure · 9. Scale · 10. Roadmap
+8. Infrastructure · 9. Scale · 10. Roadmap
