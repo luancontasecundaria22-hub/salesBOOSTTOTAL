@@ -160,5 +160,35 @@ Defer: Enrichment, Strategy, Sender automation, and all other business agents.
 
 ---
 
+## Section 6 — Automation (LOCKED)
+
+**Core model: tiered approval by confidence (approve-by-exception).**
+
+| Confidence | Action |
+|---|---|
+| High (≥ ~0.85, per-client tunable) | **Auto-send** immediately, log, notify client after |
+| Medium (~0.6–0.85) | Hold for **client approval** in their Discord server, with **timeout** → auto-send or drop (protects 24h window) |
+| Low (< ~0.6) | **Escalate to operator (founder)**, never auto-send |
+
+1. **Auto-send high-confidence: YES.** Each client gets a **kill-switch** to flip
+   their account to "approve everything" if nervous.
+2. **Confidence threshold: per-client** (sensible default, adjustable).
+3. **Permanent human hard-stops** (regardless of confidence): price/quotes,
+   refunds, legal/contractual commitments, complaints.
+4. **Follow-ups: auto-respond** on a schedule using pre-approved sequence
+   templates (must respect 24h window → use WhatsApp templates outside it).
+5. **NOT automated in v1:** closing/negotiation, pricing, contracts. AI hands
+   warm leads to the human for these.
+
+### Implications
+- Need a **confidence calibration** process before auto-send is trusted in prod.
+- Need a **content classifier / guardrail** to detect hard-stop topics (price,
+  refund, legal, complaint) and force human routing even on high confidence.
+- Need a **timeout/scheduler** for medium-tier holds and follow-up sequences.
+- Every auto-sent message must be **logged + surfaced to the client** after the
+  fact (trust + audit).
+
+---
+
 ## Sections still to cover
-6. Automation · 7. Security · 8. Infrastructure · 9. Scale · 10. Roadmap
+7. Security · 8. Infrastructure · 9. Scale · 10. Roadmap
