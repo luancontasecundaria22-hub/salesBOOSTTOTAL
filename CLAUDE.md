@@ -21,4 +21,7 @@ through a structured discovery process (see `/docs` once populated).
 
 ## Tech Stack (planned)
 
-Discord · OpenClaw · Claude · MCP servers · Supabase · Make · future dashboard.
+Discord · OpenAI · Claude · MCP servers · Supabase · Make · future dashboard.
+
+> Note: "OpenClaw" in earlier notes = OpenAI. LLM vendor strategy (Claude-only
+> with model tiering vs. OpenAI + Claude) is being decided in discovery.

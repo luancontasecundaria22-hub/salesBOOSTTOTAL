@@ -211,5 +211,30 @@ Defer: Enrichment, Strategy, Sender automation, and all other business agents.
 
 ---
 
+## Section 8 — Infrastructure (LOCKED except LLM-vendor decision)
+
+1. **Make** = ingestion & routing plumbing (WhatsApp/IG webhooks → normalize →
+   write to Supabase → trigger agent run → deliver outbound). No AI logic/storage.
+2. **Supabase** = system of record + auth + secrets (Postgres for leads/results/
+   audit/consent/per-client config; RLS isolation; Vault for client tokens;
+   Edge Functions for server-side logic).
+3. **Claude** = reasoning in agent steps (extraction, strategy, copywriting).
+4. **Discord** = per-client approval & notification surface (one server/client).
+5. **MCP servers** = the agents' typed tools (read/write Supabase, send
+   WhatsApp/IG, post to Discord).
+6. **Dashboard** = deferred post-MVP; Discord is the interface for now.
+
+### "OpenClaw" clarified = OpenAI
+Founder's stack note "OpenClaw plus Claude" meant **OpenAI + Claude**.
+**OPEN DECISION:**
+- Option 1 (RECOMMENDED): **Claude-only, model-tiered** — Haiku for cheap steps
+  (intake, extraction, hard-stop classifier), Sonnet/Opus for strategy +
+  copywriting. OpenAI deferred. Less operational overhead for a solo operator.
+- Option 2: **OpenAI + Claude** — OpenAI for cheap high-volume steps, Claude for
+  reasoning/copywriting. More capability, more plumbing (2 keys/SDKs/rate limits).
+→ Awaiting founder choice.
+
+---
+
 ## Sections still to cover
-8. Infrastructure · 9. Scale · 10. Roadmap
+9. Scale · 10. Roadmap
