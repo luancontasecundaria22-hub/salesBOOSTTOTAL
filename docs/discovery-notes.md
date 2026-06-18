@@ -78,6 +78,31 @@ Defer: Enrichment, Strategy, Sender automation, and all other business agents.
 
 ---
 
+## Section 2 — Business Model (LOCKED)
+
+1. **Agency first, SaaS later.** Pure done-for-you for ~12 months. Architect for
+   ONE operator serving MANY clients. Per-client data separation YES; client
+   self-serve logins NO (yet). Keep SaaS door open, don't pay multi-tenancy tax now.
+2. **Pricing:** ~$1.5k setup + ~$1k–$2k/mo retainer per client. No pure
+   performance/per-lead pricing at start (attribution + billing complexity).
+3. **Year-1 target: 15–25 clients.** Assume ~200–1,000 leads/mo each →
+   **up to ~25k leads/month aggregate** at the top end.
+4. **Delivery: solo operator** (founder). Cockpit must make ONE person fast.
+
+### Scale implications of 15–25 clients (NEW — must address later)
+- **Approval bottleneck is the #1 risk.** Solo + human-approval on every lead +
+  up to 25k leads/mo = thousands of manual approvals. Pure 1-by-1 Discord
+  approval will NOT scale. Need: auto-approve for high-confidence leads, batch
+  approvals, and approve-by-exception. Revisit in Automation (Sec 6).
+- Volume now justifies **a real queue + Claude rate-limit handling**, not just
+  Make-triggered synchronous calls.
+- Per-client isolation via `client_id` on every row is still fine (one Supabase
+  project), but RLS / strict scoping becomes mandatory, not optional.
+- **Unit economics check (later):** at $1–2k/mo × 20 clients = $20–40k MRR;
+  must verify Claude+Make+infra cost per lead stays well under price.
+
+---
+
 ## Sections still to cover
-2. Business Model · 3. Users · 4. Data · 6. Automation · 7. Security ·
-8. Infrastructure · 9. Scale · 10. Roadmap
+3. Users · 4. Data · 6. Automation · 7. Security · 8. Infrastructure ·
+9. Scale · 10. Roadmap
