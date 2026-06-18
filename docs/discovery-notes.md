@@ -103,6 +103,31 @@ Defer: Enrichment, Strategy, Sender automation, and all other business agents.
 
 ---
 
+## Section 3 — Users (LOCKED)
+
+1. **The approver is the CLIENT, not the operator.** Each client approves/rejects
+   replies for their OWN leads. This dissolves the solo-operator approval
+   bottleneck — but introduces **client approval latency** as the new top risk.
+2. **Clients ARE users now** (at least at the approval step) — they interact with
+   the system, so they need a per-client interface.
+3. **Strict per-client isolation required** ("personalized chats, not one server
+   for everyone"). Decision: **one dedicated Discord server per client**
+   (Option A) — strongest isolation, branded, leak-proof at the Discord layer.
+   Data layer mirrors this: `client_id` on every row + RLS.
+4. **Operators:** founder is admin/builder. A VA/helper may be added to monitor
+   unresponsive clients & system health — NOT to approve (client does that).
+   Roles: founder = full admin; helper (later) = monitoring only, no creds/billing.
+
+### NEW top risk — client approval latency
+- Inbound leads go cold fast; client-as-approver can stall the pipeline.
+- Required mitigations (design in Sec 6):
+  - reminder nudges to the client in their Discord server
+  - timeout policy: auto-send high-confidence replies after N minutes, OR escalate
+  - "client unresponsive" alert to the founder
+  - track approval latency per client as a health metric (Analytics Agent)
+
+---
+
 ## Sections still to cover
-3. Users · 4. Data · 6. Automation · 7. Security · 8. Infrastructure ·
+4. Data · 6. Automation · 7. Security · 8. Infrastructure ·
 9. Scale · 10. Roadmap
