@@ -236,5 +236,10 @@ Founder's stack note "OpenClaw plus Claude" meant **OpenAI + Claude**.
 
 ---
 
-## Sections still to cover
-9. Scale · 10. Roadmap
+## Sections 9 (Scale) & 10 (Roadmap)
+Locked with designed-to defaults directly in `requirements.md` (founder opted to
+finalize the core spec and continue the build in Cowork).
+
+---
+
+## STATUS: discovery complete → see `requirements.md` for the final spec.
